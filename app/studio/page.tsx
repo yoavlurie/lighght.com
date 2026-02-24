@@ -149,11 +149,6 @@ export default function StudioPage() {
     }
   }, [word]);
 
-  /* --- Print --- */
-  function handlePrint() {
-    window.print();
-  }
-
   /* --- Slider increment helpers --- */
   function adjustValue(
     current: number,
@@ -416,14 +411,9 @@ export default function StudioPage() {
             Create
           </button>
         ) : (
-          <div className={styles.shareActions}>
-            <button className={styles.shareButton} onClick={handleShare}>
-              Share
-            </button>
-            <button className={styles.printButton} onClick={handlePrint}>
-              Print Poster
-            </button>
-          </div>
+          <button className={styles.shareButton} onClick={handleShare}>
+            Share
+          </button>
         )}
 
         {/* Share fallback message */}

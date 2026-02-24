@@ -82,8 +82,10 @@
   opacity: 0.2;
 }
 
-.scrollArrow {
-  font-size: 1.25rem;
+.scrollText {
+  font-family: var(--font-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
   color: var(--color-black);
 }
 

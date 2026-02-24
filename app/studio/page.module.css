@@ -322,8 +322,7 @@
 }
 
 .createButton,
-.shareButton,
-.printButton {
+.shareButton {
   font-family: var(--font-serif);
   font-size: 0.8125rem;
   text-transform: uppercase;
@@ -337,8 +336,7 @@
 }
 
 .createButton:hover:not(:disabled),
-.shareButton:hover,
-.printButton:hover {
+.shareButton:hover {
   background: var(--color-black);
   color: var(--color-white);
 }
@@ -346,11 +344,6 @@
 .createButton:disabled {
   opacity: 0.25;
   cursor: default;
-}
-
-.shareActions {
-  display: flex;
-  gap: 0.75rem;
 }
 
 .shareHint {
