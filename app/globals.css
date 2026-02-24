@@ -1,0 +1,158 @@
+/* ============================================
+   LIGHGHT.COM — Global Styles
+   Literary minimalism. Museum-like. Quiet.
+   ============================================ */
+
+/* --- CSS Custom Properties --- */
+:root {
+  --color-yellow: #F4D64E;
+  --color-black: #111111;
+  --color-white: #FFFFFF;
+  --color-red: #B23A2A;
+  --color-gray: #F5F5F5;
+
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-grotesk: "Inter", -apple-system, Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --font-humanist: "Source Sans 3", "Source Sans Pro", Helvetica, Arial, sans-serif;
+
+  --max-prose: 65ch;
+  --line-height-prose: 1.75;
+  --letter-spacing-nav: 0.15em;
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-serif);
+  color: var(--color-black);
+  background: var(--color-white);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* --- Utility --- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Page transition fade --- */
+.page-enter {
+  opacity: 0;
+}
+
+.page-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease;
+}
+
+/* --- Prose --- */
+.prose {
+  max-width: var(--max-prose);
+  line-height: var(--line-height-prose);
+  font-size: 1.0625rem;
+}
+
+.prose p {
+  margin-bottom: 1.5em;
+}
+
+.prose h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 2.5em;
+  margin-bottom: 1em;
+  letter-spacing: 0.02em;
+}
+
+.prose h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+/* --- Print Mode --- */
+@media print {
+  nav,
+  .studio-controls,
+  .studio-actions,
+  .studio-intro,
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .artboard-print-target {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: white !important;
+    margin: 0;
+    padding: 2in;
+  }
+
+  .artboard-print-target .artboard-word {
+    font-size: 4rem !important;
+    color: black !important;
+  }
+
+  @page {
+    margin: 0;
+    size: auto;
+  }
+}

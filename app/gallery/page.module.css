@@ -1,0 +1,52 @@
+.main {
+  min-height: 100dvh;
+  padding: 6rem 1.5rem 4rem;
+}
+
+.header {
+  max-width: var(--max-prose);
+  margin: 0 auto 4rem;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  color: var(--color-black);
+}
+
+.works {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.work {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.workText {
+  font-family: var(--font-grotesk);
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  color: var(--color-black);
+  line-height: 1.2;
+}
+
+.workCaption {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--color-black);
+  opacity: 0.45;
+  margin-top: 1.5rem;
+  letter-spacing: 0.05em;
+}

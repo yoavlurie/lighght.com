@@ -1,0 +1,88 @@
+.main {
+  min-height: 100dvh;
+  padding: 6rem 1.5rem 6rem;
+}
+
+.article {
+  max-width: var(--max-prose);
+  margin: 0 auto;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  color: var(--color-black);
+  margin-bottom: 3rem;
+}
+
+.body {
+  font-family: var(--font-serif);
+}
+
+/* --- Books --- */
+
+.books {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-black);
+}
+
+.booksTitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  margin-bottom: 1.5rem;
+}
+
+.booksList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bookEntry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.bookTitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.bookMeta {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  opacity: 0.5;
+}
+
+/* --- Colophon --- */
+
+.colophon {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-black);
+}
+
+.colophonTitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  margin-bottom: 1rem;
+}
+
+.colophonText {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  opacity: 0.7;
+}
