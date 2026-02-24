@@ -10,7 +10,7 @@ export default function LandingPage() {
   const [hovering, setHovering] = useState(false);
 
   function handleClick() {
-    router.push("/gallery");
+    router.push("/exhibition");
   }
 
   return (

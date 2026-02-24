@@ -1,0 +1,106 @@
+/* Exhibition Board — centered white card on grey background */
+
+.main {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+}
+
+.card {
+  background: var(--color-white);
+  border: var(--artboard-border);
+  max-width: 600px;
+  width: 100%;
+  padding: 3rem 2.5rem;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: var(--letter-spacing-nav);
+  color: var(--color-black);
+  margin-bottom: 2.5rem;
+}
+
+.body {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.75;
+  max-width: 60ch;
+  color: var(--color-black);
+}
+
+.body p {
+  margin-bottom: 1.25em;
+}
+
+.body em {
+  font-style: italic;
+}
+
+.question {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  color: var(--color-black);
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* --- Navigation links --- */
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-top: 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.primaryLink {
+  font-family: var(--font-serif);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  transition: opacity 200ms ease;
+}
+
+.primaryLink:hover {
+  opacity: 0.6;
+}
+
+.secondaryLink {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  letter-spacing: 0.05em;
+  color: var(--color-black);
+  opacity: 0.45;
+  transition: opacity 200ms ease;
+}
+
+.secondaryLink:hover {
+  opacity: 1;
+}
+
+/* --- Mobile adjustments --- */
+
+@media (max-width: 640px) {
+  .card {
+    padding: 2rem 1.5rem;
+  }
+
+  .body {
+    font-size: 0.9375rem;
+  }
+}

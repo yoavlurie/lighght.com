@@ -10,6 +10,8 @@
   --color-white: #FFFFFF;
   --color-red: #B23A2A;
   --color-gray: #F5F5F5;
+  --color-page-bg: #F7F7F7;
+  --artboard-border: 1px solid rgba(0, 0, 0, 0.08);
 
   --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
   --font-grotesk: "Inter", -apple-system, Helvetica, Arial, sans-serif;
@@ -39,7 +41,7 @@ html {
 body {
   font-family: var(--font-serif);
   color: var(--color-black);
-  background: var(--color-white);
+  background: var(--color-page-bg);
   line-height: 1.6;
 }
 

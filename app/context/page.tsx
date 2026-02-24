@@ -156,6 +156,57 @@ export default function ContextPage() {
             ))}
           </ol>
         </section>
+
+        <section className={styles.parallels}>
+          <h2 className={styles.parallelsTitle}>
+            Parallel Minimalist Practices
+          </h2>
+
+          <div className={`prose ${styles.body}`}>
+            <h3>The Blank Page as Statement</h3>
+            <p>
+              Before minimalist poetry, the Italian Futurists experimented
+              with the page itself as material. Filippo Marinetti&rsquo;s
+              &ldquo;words-in-freedom&rdquo; scattered language across the
+              page, breaking syntax and grammar. But it was the later
+              impulse toward emptiness — the poem that is almost not
+              there — that anticipates Saroyan. The blank page is not
+              nothing. It is the loudest possible silence.
+            </p>
+
+            <h3>Haiku and the Discipline of Compression</h3>
+            <p>
+              The Japanese haiku tradition demonstrates that severe formal
+              constraint can produce extraordinary depth. Seventeen
+              syllables. A seasonal reference. An image. Matsuo Basho
+              proved that a poem could hold an entire landscape in a
+              breath. Minimalist poetry inherits this discipline: the
+              conviction that less structure does not mean less meaning,
+              but more pressure per word.
+            </p>
+
+            <h3>Concrete Poetry and the Visual Word</h3>
+            <p>
+              The concrete poets of Brazil, Scotland, and Germany treated
+              language as a visual and spatial medium. The Noigandres
+              group argued for the poem as object. Ian Hamilton Finlay
+              carved poems into stone. Eugen Gomringer arranged words as
+              constellations. In each case, the poem became something you
+              saw before you read — the shape of language preceding its
+              meaning.
+            </p>
+
+            <h3>Conceptual Art and the Reduction of Means</h3>
+            <p>
+              Conceptual artists like Sol LeWitt and Lawrence Weiner
+              reduced art to its instructions or its language. A wall
+              drawing described in words. A sculpture that exists as a
+              sentence. This impulse shares DNA with one-word poetry: the
+              belief that the gesture of making can be compressed until
+              only the essential decision remains.
+            </p>
+          </div>
+        </section>
       </article>
     </main>
   );

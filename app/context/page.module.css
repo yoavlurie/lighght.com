@@ -65,3 +65,20 @@
   line-height: 1.5;
   color: var(--color-black);
 }
+
+/* --- Parallel Minimalist Practices --- */
+
+.parallels {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-black);
+}
+
+.parallelsTitle {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  margin-bottom: 2rem;
+}

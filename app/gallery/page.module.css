@@ -1,3 +1,5 @@
+/* Gallery — horizontal snap scroll on mobile, vertical on desktop */
+
 .main {
   min-height: 100dvh;
   padding: 6rem 1.5rem 4rem;
@@ -5,7 +7,7 @@
 
 .header {
   max-width: var(--max-prose);
-  margin: 0 auto 4rem;
+  margin: 0 auto 2rem;
 }
 
 .heading {
@@ -17,10 +19,27 @@
   color: var(--color-black);
 }
 
+/* --- Mobile: horizontal snap scroll --- */
+
 .works {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 0;
+  /* Subtle right-edge overflow hint: padding lets next card peek */
+  padding-right: 15vw;
+}
+
+/* Hide scrollbar but keep functionality */
+.works::-webkit-scrollbar {
+  display: none;
+}
+
+.works {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .work {
@@ -28,9 +47,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80vh;
-  padding: 4rem 0;
+  min-width: 85vw;
+  min-height: 70vh;
+  padding: 4rem 2rem;
   text-align: center;
+  scroll-snap-align: start;
+  flex-shrink: 0;
 }
 
 .workText {
@@ -49,4 +71,41 @@
   opacity: 0.45;
   margin-top: 1.5rem;
   letter-spacing: 0.05em;
+}
+
+/* --- Scroll hint (mobile only) --- */
+
+.scrollHint {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  opacity: 0.2;
+}
+
+.scrollArrow {
+  font-size: 1.25rem;
+  color: var(--color-black);
+}
+
+/* --- Desktop: vertical stack --- */
+
+@media (min-width: 768px) {
+  .works {
+    flex-direction: column;
+    align-items: center;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    padding-right: 0;
+  }
+
+  .work {
+    min-width: auto;
+    min-height: 80vh;
+    width: 100%;
+  }
+
+  /* Hide scroll hint on desktop */
+  .scrollHint {
+    display: none;
+  }
 }

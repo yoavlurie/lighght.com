@@ -25,6 +25,29 @@ const CANVAS_COLORS = [
 const ALLOWED_PATTERN = /^[a-zA-Z\s.,'\-?!]*$/;
 const MAX_LENGTH = 12;
 
+/* Shared artboard inline styles — used for both visible and export containers */
+function artboardWordStyle(
+  font: string,
+  fontWeight: number,
+  fontSize: string,
+  letterSpacing: string,
+  alignment: string,
+  textColor: string
+): React.CSSProperties {
+  return {
+    fontFamily: font,
+    fontWeight,
+    fontSize,
+    letterSpacing,
+    textAlign: alignment as React.CSSProperties["textAlign"],
+    color: textColor,
+    display: "block",
+    width: "100%",
+    padding: "0 1rem",
+    wordBreak: "break-word",
+  };
+}
+
 export default function StudioPage() {
   /* --- State --- */
   const [word, setWord] = useState("");
@@ -39,10 +62,13 @@ export default function StudioPage() {
   const [shared, setShared] = useState(false);
   const [controlsOpen, setControlsOpen] = useState(false);
 
-  const artboardRef = useRef<HTMLDivElement>(null);
+  const exportRef = useRef<HTMLDivElement>(null);
 
   /* Text color: white on black canvas, black otherwise */
   const textColor = canvasColor.value === "#111111" ? "#FFFFFF" : "#111111";
+
+  /* Scale factor: export font size relative to artboard size */
+  const exportFontScale = 1080 / 400; /* approximate visible artboard width */
 
   /* --- Input handling --- */
   function handleInput(value: string) {
@@ -80,20 +106,15 @@ export default function StudioPage() {
     setShared(false);
   }
 
-  /* --- Share / Download --- */
+  /* --- Share / Download using hidden export container --- */
   const handleShare = useCallback(async () => {
-    if (!artboardRef.current) return;
+    if (!exportRef.current) return;
 
     try {
-      /* Generate 1080x1080 PNG */
-      const dataUrl = await toPng(artboardRef.current, {
+      const dataUrl = await toPng(exportRef.current, {
         width: 1080,
         height: 1080,
         pixelRatio: 1,
-        style: {
-          width: "1080px",
-          height: "1080px",
-        },
       });
 
       const blob = await (await fetch(dataUrl)).blob();
@@ -102,7 +123,6 @@ export default function StudioPage() {
 
       const shareText = `Minimalist poem created at lighght.com\nInspired by Aram Saroyan\n@lighghtpoem\n#minimalistpoetry #lighght`;
 
-      /* Try Web Share API with file support */
       if (
         typeof navigator !== "undefined" &&
         navigator.share &&
@@ -114,7 +134,6 @@ export default function StudioPage() {
           files: [file],
         });
       } else {
-        /* Fallback: download */
         const link = document.createElement("a");
         link.download = filename;
         link.href = dataUrl;
@@ -125,7 +144,6 @@ export default function StudioPage() {
 
       setShared(true);
     } catch (err) {
-      /* User cancelled share sheet — not an error */
       if (err instanceof Error && err.name === "AbortError") return;
       console.error("Share failed:", err);
     }
@@ -136,12 +154,29 @@ export default function StudioPage() {
     window.print();
   }
 
+  /* --- Slider increment helpers --- */
+  function adjustValue(
+    current: number,
+    step: number,
+    min: number,
+    max: number,
+    direction: 1 | -1
+  ): number {
+    const next = Math.round((current + step * direction) * 1000) / 1000;
+    return Math.min(max, Math.max(min, next));
+  }
+
   return (
     <main className={styles.main}>
       {/* Intro */}
-      <p className={`${styles.intro} studio-intro`}>
-        Minimalist poetry reduces language to its essential gesture.
-      </p>
+      <div className="studio-intro">
+        <p className={styles.intro}>
+          Minimalist poetry reduces language to its essential gesture.
+        </p>
+        <p className={styles.introHint}>
+          Tap controls to refine. Tap Share to publish.
+        </p>
+      </div>
 
       {/* Word input */}
       <div className={`${styles.inputSection} studio-controls`}>
@@ -201,50 +236,95 @@ export default function StudioPage() {
 
           {/* Font weight */}
           <div className={styles.controlGroup}>
-            <span className={styles.controlLabel}>
-              Weight — {fontWeight}
-            </span>
-            <input
-              type="range"
-              min="300"
-              max="900"
-              step="100"
-              value={fontWeight}
-              onChange={(e) => setFontWeight(Number(e.target.value))}
-              className={styles.slider}
-            />
+            <span className={styles.controlLabel}>Weight</span>
+            <div className={styles.sliderRow}>
+              <button
+                className={styles.adjustButton}
+                onClick={() => setFontWeight(adjustValue(fontWeight, 100, 300, 900, -1))}
+                aria-label="Decrease weight"
+              >
+                −
+              </button>
+              <input
+                type="range"
+                min="300"
+                max="900"
+                step="100"
+                value={fontWeight}
+                onChange={(e) => setFontWeight(Number(e.target.value))}
+                className={styles.slider}
+              />
+              <button
+                className={styles.adjustButton}
+                onClick={() => setFontWeight(adjustValue(fontWeight, 100, 300, 900, 1))}
+                aria-label="Increase weight"
+              >
+                +
+              </button>
+              <span className={styles.sliderValue}>{fontWeight}</span>
+            </div>
           </div>
 
           {/* Letter spacing */}
           <div className={styles.controlGroup}>
-            <span className={styles.controlLabel}>
-              Spacing — {letterSpacing.toFixed(2)}em
-            </span>
-            <input
-              type="range"
-              min="0"
-              max="0.5"
-              step="0.01"
-              value={letterSpacing}
-              onChange={(e) => setLetterSpacing(Number(e.target.value))}
-              className={styles.slider}
-            />
+            <span className={styles.controlLabel}>Spacing</span>
+            <div className={styles.sliderRow}>
+              <button
+                className={styles.adjustButton}
+                onClick={() => setLetterSpacing(adjustValue(letterSpacing, 0.01, 0, 0.5, -1))}
+                aria-label="Decrease spacing"
+              >
+                −
+              </button>
+              <input
+                type="range"
+                min="0"
+                max="0.5"
+                step="0.01"
+                value={letterSpacing}
+                onChange={(e) => setLetterSpacing(Number(e.target.value))}
+                className={styles.slider}
+              />
+              <button
+                className={styles.adjustButton}
+                onClick={() => setLetterSpacing(adjustValue(letterSpacing, 0.01, 0, 0.5, 1))}
+                aria-label="Increase spacing"
+              >
+                +
+              </button>
+              <span className={styles.sliderValue}>{letterSpacing.toFixed(2)}em</span>
+            </div>
           </div>
 
           {/* Font size */}
           <div className={styles.controlGroup}>
-            <span className={styles.controlLabel}>
-              Size — {fontSize.toFixed(1)}rem
-            </span>
-            <input
-              type="range"
-              min="1"
-              max="8"
-              step="0.1"
-              value={fontSize}
-              onChange={(e) => setFontSize(Number(e.target.value))}
-              className={styles.slider}
-            />
+            <span className={styles.controlLabel}>Size</span>
+            <div className={styles.sliderRow}>
+              <button
+                className={styles.adjustButton}
+                onClick={() => setFontSize(adjustValue(fontSize, 0.1, 1, 8, -1))}
+                aria-label="Decrease size"
+              >
+                −
+              </button>
+              <input
+                type="range"
+                min="1"
+                max="8"
+                step="0.1"
+                value={fontSize}
+                onChange={(e) => setFontSize(Number(e.target.value))}
+                className={styles.slider}
+              />
+              <button
+                className={styles.adjustButton}
+                onClick={() => setFontSize(adjustValue(fontSize, 0.1, 1, 8, 1))}
+                aria-label="Increase size"
+              >
+                +
+              </button>
+              <span className={styles.sliderValue}>{fontSize.toFixed(1)}rem</span>
+            </div>
           </div>
 
           {/* Alignment */}
@@ -282,31 +362,47 @@ export default function StudioPage() {
         </div>
       </div>
 
-      {/* Artboard */}
+      {/* Visible Artboard */}
       <div className={styles.artboardWrapper}>
         <div
-          ref={artboardRef}
           className={`${styles.artboard} artboard-print-target`}
           style={{ background: canvasColor.value }}
         >
           <span
             className="artboard-word"
-            style={{
-              fontFamily: font.value,
-              fontWeight: fontWeight,
-              fontSize: `${fontSize}rem`,
-              letterSpacing: `${letterSpacing}em`,
-              textAlign: alignment,
-              color: textColor,
-              display: "block",
-              width: "100%",
-              padding: "0 1rem",
-              wordBreak: "break-word",
-            }}
+            style={artboardWordStyle(
+              font.value,
+              fontWeight,
+              `${fontSize}rem`,
+              `${letterSpacing}em`,
+              alignment,
+              textColor
+            )}
           >
             {word || " "}
           </span>
         </div>
+      </div>
+
+      {/* Hidden export container — exactly 1080x1080, only artboard content */}
+      <div
+        ref={exportRef}
+        className={styles.exportContainer}
+        aria-hidden="true"
+        style={{ background: canvasColor.value }}
+      >
+        <span
+          style={artboardWordStyle(
+            font.value,
+            fontWeight,
+            `${fontSize * exportFontScale}rem`,
+            `${letterSpacing}em`,
+            alignment,
+            textColor
+          )}
+        >
+          {word || " "}
+        </span>
       </div>
 
       {/* Actions */}

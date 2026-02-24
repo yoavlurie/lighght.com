@@ -23,6 +23,15 @@
   line-height: 1.5;
 }
 
+.introHint {
+  font-family: var(--font-serif);
+  font-size: 0.8125rem;
+  color: var(--color-black);
+  opacity: 0.35;
+  margin-top: 0.375rem;
+  line-height: 1.4;
+}
+
 /* --- Word Input --- */
 
 .inputSection {
@@ -107,15 +116,15 @@
 }
 
 .controlsOpen {
-  max-height: 600px;
+  max-height: 800px;
 }
 
 .controlGroup {
-  padding: 1rem 0;
+  padding: 1.25rem 0;
   border-bottom: 1px solid rgba(17, 17, 17, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.625rem;
 }
 
 .controlLabel {
@@ -135,11 +144,14 @@
 
 .fontOption {
   font-size: 0.8125rem;
-  padding: 0.375rem 0.75rem;
+  padding: 0.5rem 0.875rem;
   border: 1px solid rgba(17, 17, 17, 0.15);
   color: var(--color-black);
   opacity: 0.5;
   transition: opacity 200ms ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
 .fontOptionActive {
@@ -147,29 +159,79 @@
   border-color: var(--color-black);
 }
 
-/* Sliders */
+/* --- Slider row with ± buttons --- */
+
+.sliderRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.adjustButton {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-black);
+  border: 1px solid rgba(17, 17, 17, 0.15);
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 200ms ease;
+}
+
+.adjustButton:hover {
+  border-color: var(--color-black);
+}
+
+.sliderValue {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  opacity: 0.5;
+  min-width: 4rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Sliders — improved ergonomics for mobile */
 .slider {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 1px;
-  background: var(--color-black);
+  height: 44px;
+  background: transparent;
   outline: none;
   cursor: pointer;
+  flex: 1;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 6px;
+  background: rgba(17, 17, 17, 0.12);
 }
 
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 12px;
-  height: 12px;
+  width: 24px;
+  height: 24px;
   background: var(--color-black);
   cursor: pointer;
+  margin-top: -9px;
+}
+
+.slider::-moz-range-track {
+  height: 6px;
+  background: rgba(17, 17, 17, 0.12);
+  border: none;
 }
 
 .slider::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
+  width: 24px;
+  height: 24px;
   background: var(--color-black);
   border: none;
   cursor: pointer;
@@ -184,12 +246,15 @@
 .alignmentOption {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  padding: 0.375rem 0.75rem;
+  padding: 0.5rem 0.875rem;
   border: 1px solid rgba(17, 17, 17, 0.15);
   color: var(--color-black);
   opacity: 0.5;
   text-transform: lowercase;
   transition: opacity 200ms ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
 }
 
 .alignmentActive {
@@ -204,8 +269,8 @@
 }
 
 .canvasSwatch {
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
   border: 1px solid rgba(17, 17, 17, 0.2);
   cursor: pointer;
   transition: border-color 200ms ease;
@@ -229,6 +294,22 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border: var(--artboard-border);
+}
+
+/* --- Hidden export container — exactly 1080x1080, off-screen --- */
+
+.exportContainer {
+  position: fixed;
+  left: -9999px;
+  top: -9999px;
+  width: 1080px;
+  height: 1080px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 /* --- Actions --- */
@@ -252,6 +333,7 @@
   color: var(--color-black);
   background: transparent;
   transition: background 200ms ease, color 200ms ease;
+  min-height: 44px;
 }
 
 .createButton:hover:not(:disabled),
@@ -283,14 +365,7 @@
   font-family: var(--font-serif);
   font-size: 0.875rem;
   font-style: italic;
-  opacity: 0;
-  animation: fadeIn 600ms ease forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 0.6;
-  }
+  opacity: 0.6;
 }
 
 /* --- Desktop: keep vertical, center artboard --- */
@@ -298,10 +373,6 @@
 @media (min-width: 768px) {
   .main {
     padding-top: 6rem;
-  }
-
-  .controlsToggle {
-    /* Still show toggle on desktop for consistency */
   }
 
   .artboard {
