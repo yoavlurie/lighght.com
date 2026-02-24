@@ -37,8 +37,12 @@ const TIMELINE = [
 export default function ContextPage() {
   return (
     <main className={styles.main}>
+      <header className={styles.header}>
+        <h1 className={styles.heading}>Context</h1>
+      </header>
+
       <article className={styles.article}>
-        <h1 className={styles.title}>How Little Can a Poem Be?</h1>
+        <h2 className={styles.title}>How Little Can a Poem Be?</h2>
 
         <div className={`prose ${styles.body}`}>
           <p>

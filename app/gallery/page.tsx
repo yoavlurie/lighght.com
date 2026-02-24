@@ -33,7 +33,9 @@ export default function GalleryPage() {
 
       {/* Subtle scroll hint */}
       <div className={styles.scrollHint} aria-hidden="true">
+        <span className={styles.scrollArrow}>←</span>
         <span className={styles.scrollText}>scroll for more</span>
+        <span className={styles.scrollArrow}>→</span>
       </div>
     </main>
   );

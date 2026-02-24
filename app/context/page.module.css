@@ -3,6 +3,20 @@
   padding: 6rem 1.5rem 6rem;
 }
 
+.header {
+  max-width: var(--max-prose);
+  margin: 0 auto 2rem;
+}
+
+.heading {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  color: var(--color-black);
+}
+
 .article {
   max-width: var(--max-prose);
   margin: 0 auto;

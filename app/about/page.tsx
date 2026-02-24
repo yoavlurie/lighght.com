@@ -1,7 +1,12 @@
 import styles from "./page.module.css";
 
 const BOOKS = [
-  { title: "Complete Minimal Poems", publisher: "Ugly Duckling Presse", year: "2007" },
+  {
+    title: "Complete Minimal Poems",
+    publisher: "Ugly Duckling Presse",
+    year: "2007",
+    url: "https://www.amazon.com/Complete-Minimal-Poems-Aram-Saroyan-ebook/dp/B0BZ2N7JR7/ref=tmm_kin_swatch_0",
+  },
   { title: "Pages", publisher: "Random House", year: "1968" },
   { title: "Aram Saroyan", publisher: "Random House", year: "1968" },
   { title: "Words & Photographs", publisher: "Big Table Publishing", year: "2010" },
@@ -55,7 +60,18 @@ export default function AboutPage() {
           <ul className={styles.booksList}>
             {BOOKS.map((book, i) => (
               <li key={i} className={styles.bookEntry}>
-                <span className={styles.bookTitle}>{book.title}</span>
+                {"url" in book && book.url ? (
+                  <a
+                    href={book.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.bookTitle}
+                  >
+                    {book.title}
+                  </a>
+                ) : (
+                  <span className={styles.bookTitle}>{book.title}</span>
+                )}
                 <span className={styles.bookMeta}>
                   {book.publisher}, {book.year}
                 </span>
@@ -70,7 +86,17 @@ export default function AboutPage() {
             lighght.com is a digital museum and studio for minimalist poetry,
             inspired by the work of Aram Saroyan and the concrete poetry
             tradition. It is not affiliated with Aram Saroyan. The studio
-            invites visitors to create their own one-word poems and share them.
+            invites visitors to create their own one-word poems and share
+            them with us by tagging{" "}
+            <a
+              href="https://instagram.com/lighghtpoem"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.colophonLink}
+            >
+              @lighghtpoem
+            </a>
+            .
           </p>
         </section>
       </article>

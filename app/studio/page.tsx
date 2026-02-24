@@ -111,11 +111,29 @@ export default function StudioPage() {
     if (!exportRef.current) return;
 
     try {
-      const dataUrl = await toPng(exportRef.current, {
+      /* Temporarily make export container visible for Safari/iOS rendering */
+      const el = exportRef.current;
+      el.style.opacity = "1";
+      el.style.position = "fixed";
+      el.style.left = "0";
+      el.style.top = "0";
+      el.style.zIndex = "-1";
+
+      /* Allow a frame for Safari to paint */
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+      const dataUrl = await toPng(el, {
         width: 1080,
         height: 1080,
         pixelRatio: 1,
       });
+
+      /* Restore hidden state */
+      el.style.opacity = "0";
+      el.style.position = "absolute";
+      el.style.left = "";
+      el.style.top = "";
+      el.style.zIndex = "-1";
 
       const blob = await (await fetch(dataUrl)).blob();
       const filename = `lighght-${word.trim().toLowerCase().replace(/\s+/g, "-")}.png`;
@@ -163,6 +181,9 @@ export default function StudioPage() {
 
   return (
     <main className={styles.main}>
+      {/* Page heading */}
+      <h1 className={styles.heading}>Studio</h1>
+
       {/* Intro */}
       <div className="studio-intro">
         <p className={styles.intro}>

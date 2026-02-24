@@ -12,6 +12,15 @@
   gap: 2rem;
 }
 
+.heading {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-nav);
+  color: var(--color-black);
+}
+
 /* --- Intro --- */
 
 .intro {
@@ -300,9 +309,7 @@
 /* --- Hidden export container — exactly 1080x1080, off-screen --- */
 
 .exportContainer {
-  position: fixed;
-  left: -9999px;
-  top: -9999px;
+  position: absolute;
   width: 1080px;
   height: 1080px;
   display: flex;
@@ -310,6 +317,8 @@
   justify-content: center;
   overflow: hidden;
   pointer-events: none;
+  opacity: 0;
+  z-index: -1;
 }
 
 /* --- Actions --- */

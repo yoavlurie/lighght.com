@@ -10,15 +10,15 @@ export default function ExhibitionPage() {
 
         <div className={styles.body}>
           <p>
-            This is a digital, interactive museum to minimalist poetry.
+            lighght.com is an interactive homage to minimalist poetry.
           </p>
           <p>
             Inspired by Aram Saroyan&rsquo;s one-word poem{" "}
-            <em>lighght</em>, the site explores how little language can
-            become — and still remain a poem.
+            <em>lighght</em>, the site explores how the smallest bit of
+            language can become &mdash; and still remain &mdash; a poem.
           </p>
           <p>
-            You are invited to look, to read, and to create.
+            You are invited to look, to contemplate, and to create.
           </p>
           <p>
             In a time when words are generated endlessly and instantly,

@@ -55,6 +55,19 @@
   font-family: var(--font-serif);
   font-size: 1rem;
   font-style: italic;
+  color: var(--color-black);
+  text-decoration: none;
+}
+
+a.bookTitle {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+  transition: opacity 200ms ease;
+}
+
+a.bookTitle:hover {
+  opacity: 0.6;
 }
 
 .bookMeta {
@@ -85,4 +98,16 @@
   font-size: 0.9375rem;
   line-height: 1.65;
   opacity: 0.7;
+}
+
+.colophonLink {
+  color: var(--color-black);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+  transition: opacity 200ms ease;
+}
+
+.colophonLink:hover {
+  opacity: 0.6;
 }
